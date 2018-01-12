@@ -9,7 +9,7 @@ tar zxvf /usr/local/mysql-5.6.38-linux-glibc2.12-x86_64.tar.gz
 ln -s /usr/local/mysql-5.6.38-linux-glibc2.12-x86_64 mysql
 cd mysql
 scripts/mysql_install_db --user=mysql
-bin/mysqld_safe --user=mysql
+bin/mysqld_safe --user=mysql &
 cp support-files/mysql.server /etc/init.d/mysqld
 /etc/init.d/mysqld start
 a=`cat arquivosbin | wc | cut -c6-7`
