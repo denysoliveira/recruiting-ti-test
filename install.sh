@@ -12,7 +12,8 @@ scripts/mysql_install_db --user=mysql
 bin/mysqld_safe --user=mysql &
 cp support-files/mysql.server /etc/init.d/mysqld
 /etc/init.d/mysqld start
-a=`cat arquivosbin | wc | cut -c6-7`
+ls /usr/local/mysql/bin/ > arquivosbin
+let a=`cat arquivosbin | wc | cut -c6-7`
 cont=1
 let b="$a+1"
          while [  $cont -lt $b ]; do
