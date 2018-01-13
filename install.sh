@@ -24,9 +24,6 @@ mysql -e "CREATE DATABASE cinema"
 mysql cinema < /tmp/database.sql
 
 #!/bin/bash
-### Install PHP 7.1 on CentOS 7.3 64Bits
-### http://www.shaunfreeman.name/compiling-php-7-on-centos/
-### https://www.howtoforge.com/tutorial/how-to-install-php-7-on-debian/
 
 #php fpm
 yum -y install git gcc gcc-c++ libxml2-devel pkgconfig openssl-devel bzip2-devel curl-devel libpng-devel libjpeg-devel 
@@ -77,21 +74,4 @@ echo 'zend_extension=opcache.so' >> /opt/php-7.1/lib/php.ini
 sed -i "s|;pid = run/php-fpm.pid|pid = run/php-fpm.pid|" /opt/php-7.1/etc/php-fpm.conf
 #sed -i "s|listen = 127.0.0.1:9000|listen = 127.0.0.1:8999|" /opt/php-7.1/etc/php-fpm.d/www.conf
 sed -i "s|;include=etc/fpm.d/\*.conf|include=/opt/php-7.1/etc/php-fpm.d/\*.conf|" /opt/php-7.1/etc/php-fpm.conf
-
-
-#echo '[Unit]
-#Description=The PHP 7.1 FastCGI Process Manager
-#After=network.target
-#[Service]
-#Type=simple
-#PIDFile=/opt/php-7.1/var/run/php-fpm.pid
-#ExecStart=/opt/php-7.1/sbin/php-fpm --nodaemonize --fpm-config /opt/php-7.1/etc/php-fpm.conf
-#ExecReload=/bin/kill -USR2 $MAINPID
-#[Install]
-#WantedBy=multi-user.target' > /lib/systemd/system/php-7.1-fpm.service
-
-
-#systemctl enable php-7.1-fpm.service
-#systemctl daemon-reload
-#systemctl start php-7.1-fpm.service
 
