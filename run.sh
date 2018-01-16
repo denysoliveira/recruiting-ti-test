@@ -19,25 +19,19 @@ let b="$a+1"
                 ln -s /usr/local/mysql/bin/`cat arquivosbin | sed -n "$cont"p` /bin/
              let cont=cont+1 
          done
+mv /tmp/my.cnf /usr/local/mysql-5.6.38-linux-glibc2.12-x86_64/my.cnf
 /etc/init.d/mysql.server start
 mysql -e "CREATE DATABASE cinema"
 mysql cinema < /tmp/database.sql
 mysql -e "GRANT SELECT ON cinema.* TO ''@'localhost';"
 mysql -e "flush privileges"
 
-#php fpm
-yum -y install git gcc gcc-c++ libxml2-devel pkgconfig openssl-devel bzip2-devel curl-devel libpng-devel libjpeg-devel 
-yum -y install libXpm-devel freetype-devel gmp-devel libmcrypt-devel mariadb-devel aspell-devel recode-devel libpqxx-devel
-yum -y install autoconf bison re2c libicu-devel libwebp-devel wget unzip net-tools libc-client-devel libpng12-devel
-yum -y install libxslt-devel
-
 # Install PHP 7.1
 yum -y install php71 php71-gd php71-imap php71-mbstring php71-mysqlnd php71-opcache php71-pdo php71-pecl-apcu php71-fpm 
 
 mv /tmp/index.php /usr/share/nginx/html/index.php
 mv /tmp/ping.php /usr/share/nginx/html/ping.php
-mv /usr/share/nginx/html/index.htlm /usr/share/nginx/html/index.orig
+mv /usr/share/nginx/html/index.html /usr/share/nginx/html/index.orig
+sudo /etc/init.d/mysql.server restart
 sudo /etc/init.d/nginx start
 sudo /etc/init.d/php-fpm start
-
-echo "Sucesso!"
